@@ -68,9 +68,11 @@ wxChartsLegendData::wxChartsLegendData()
 
 wxChartsLegendData::wxChartsLegendData(const std::map<wxString, wxChartSliceData>& slices)
 {
-    for (const auto &slice : slices)
-    {
-        m_items.push_back(wxChartsLegendItem(slice.second));
+    // for (const auto &slice : slices)
+	std::map<wxString,wxChartSliceData>::const_iterator it = slices.begin();
+	while(it != slices.end()){
+        m_items.push_back(wxChartsLegendItem(it->second));
+		it++;
     }
 }
 

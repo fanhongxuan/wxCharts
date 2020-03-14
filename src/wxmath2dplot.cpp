@@ -400,9 +400,11 @@ void wxMath2DPlot::Update()
     auto transformY = m_options->GetAxisFuncY();
     for (size_t i = 0; i < m_datasets.size(); ++i)
         {
-        for (const auto &el : m_datasets[i]->GetPoints())
+			wxVector<Point::ptr>::const_iterator it = m_datasets[i]->GetPoints().begin();
+			while(it != m_datasets[i]->GetPoints().end())
+            // for (const auto &el : m_datasets[i]->GetPoints())
             {
-            auto value = el->GetValue();
+            auto value = (*it)->GetValue(); it++;
             auto tX = transformX(value.m_x);
             auto tY = transformY(value.m_y);
             if (maxX < tX)
@@ -429,8 +431,12 @@ void wxMath2DPlot::Update()
 
 void wxMath2DPlot::Initialize(const wxMath2DPlotData &data)
 {
-    for (const auto &el : data.GetDatasets())
-        AddDataset(el,false);
+	wxVector<wxMath2DPlotDataset::ptr>::const_iterator it = data.GetDatasets().begin();
+	while(it != data.GetDatasets().end()){
+    // for (const auto &el : data.GetDatasets())
+        AddDataset(*it,false);
+		it++;
+	}
 }
 
 wxDouble wxMath2DPlot::GetMinXValue(const wxVector<wxMath2DPlotDataset::ptr>& datasets,const AxisFunc &F)

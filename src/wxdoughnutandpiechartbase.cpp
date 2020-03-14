@@ -61,8 +61,13 @@ void wxPieChartData::UpdateSlices(const wxVector<wxChartSliceData> &slices)
 
 void wxPieChartData::AddSlices(const wxVector<wxChartSliceData> &slices)
 {
-    for (const auto &slice : slices)
-        Add(slice);
+	wxVector<wxChartSliceData>::const_iterator it = slices.begin();
+	while(it != slices.end()){
+		Add(*it);
+		it++;
+	}
+    // for (const auto &slice : slices)
+    //    Add(slice);
 
     Notify();
 }
@@ -124,10 +129,12 @@ void wxDoughnutAndPieChartBase::SetData(const std::map<wxString, wxChartSliceDat
     m_slices.resize(data.size());
     m_total = 0;
 	size_t i = 0;
-    for (const auto &pair : data)
+    // for (const auto &pair : data)
+	std::map<wxString, wxChartSliceData>::const_iterator it = data.begin();
+	while(it != data.end())
     {
-        auto slice = pair.second;
-
+        auto slice = it->second;
+		it++;
         m_total += slice.GetValue();
         wxDouble x = (m_size.GetX() / 2) - 2;
         wxDouble y = (m_size.GetY() / 2) - 2;

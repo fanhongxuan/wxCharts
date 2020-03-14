@@ -35,9 +35,12 @@ wxBoxPlotData::wxBoxPlotData(const wxVector<wxString> &labels,
                              const wxVector<wxVector<wxDouble>> &data)
     : m_labels(labels), m_data(data)
 {
-    for (auto &vec : m_data)
+	wxVector<wxVector<wxDouble>>::iterator vec = m_data.begin();
+    //for (auto &vec : m_data)
+	while(vec != m_data.end())
     {
-        std::sort(vec.begin(), vec.end());
+        std::sort(vec->begin(), vec->end());
+		vec++;
     }
 }
 
@@ -189,13 +192,17 @@ void wxBoxPlot::Initialize(const wxBoxPlotData &data)
 wxDouble wxBoxPlot::GetMinValue(const wxBoxPlotData &data)
 {
     wxDouble result = 0;
-    for(const auto &vec : data.GetData())
+
+    // for(const auto &vec : data.GetData())
+	wxVector<wxVector<wxDouble>>::const_iterator vec = data.GetData().begin();
+	while(vec != data.GetData().end())
     {
-        auto it = std::min_element(vec.begin(),vec.end());
-        if (it != vec.end() && *it < result)
+        auto it = std::min_element(vec->begin(),vec->end());
+        if (it != vec->end() && *it < result)
         {
             result = *it;
         }
+		vec++;
     }
     return result;
 }
@@ -203,13 +210,16 @@ wxDouble wxBoxPlot::GetMinValue(const wxBoxPlotData &data)
 wxDouble wxBoxPlot::GetMaxValue(const wxBoxPlotData &data)
 {
     wxDouble result = 0;
-    for(const auto &vec : data.GetData())
+    // for(const auto &vec : data.GetData())
+	wxVector<wxVector<wxDouble>>::const_iterator vec = data.GetData().begin();
+	while(vec != data.GetData().end())
     {
-        auto it = std::max_element(vec.begin(),vec.end());
-        if (it != vec.end() && *it > result)
+        auto it = std::max_element(vec->begin(),vec->end());
+        if (it != vec->end() && *it > result)
         {
             result = *it;
         }
+		vec++;
     }
     return result;
 }

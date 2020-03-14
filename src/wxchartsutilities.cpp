@@ -49,6 +49,11 @@ size_t wxChartsUtilities::GetDecimalPlaces()
     return 1;
 }
 
+inline double round( double d )
+{
+    return floor( d + 0.5 );
+}
+
 void wxChartsUtilities::CalculateGridRange(wxDouble minValue,
                                            wxDouble maxValue, 
                                            wxDouble &graphMinValue,

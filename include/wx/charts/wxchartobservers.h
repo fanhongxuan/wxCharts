@@ -55,8 +55,13 @@ public:
 
     void Notify()
     {
-        for(auto &observer : m_observers)
-            observer->OnUpdate(m_value);
+		wxVector<wxChartValueObserver<T>*>::iterator it = m_observers.begin();
+		while(it != m_observers.end()){
+			(*it)->OnUpdate(m_value);
+			it++;
+		}
+        //for(auto &observer : m_observers)
+        //   observer->OnUpdate(m_value);
     }
 
     T GetValue() const

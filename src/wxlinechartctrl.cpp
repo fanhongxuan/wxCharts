@@ -75,7 +75,7 @@ void wxLineChartCtrl::CreateContextMenu()
     Bind(wxEVT_CONTEXT_MENU, 
         [this](wxContextMenuEvent& evt) 
         {
-            PopupMenu(&m_contextMenu, ScreenToClient(evt.GetPosition()));
+            PopupMenu(&m_contextMenu, this->ScreenToClient(evt.GetPosition()));
         }
         );
 
