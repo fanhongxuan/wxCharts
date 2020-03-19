@@ -130,7 +130,8 @@ public:
         wxDouble minY,wxDouble maxY);
     void UpdateAxisLimit(const std::string& axisId, wxDouble min, wxDouble max);
     void ChangeLabels(const std::string& axisId, const wxVector<wxString> &labels, wxChartsAxisOptions options);
-
+    wxChartsAxis::ptr GetXAxis(){return m_XAxis;}
+    wxChartsAxis::ptr GetYAxis(){return m_YAxis;}
 private:
     void Update();
     void CalculatePadding(const wxChartsAxis &xAxis,

@@ -54,7 +54,7 @@ public:
         wxSharedPtr<wxScatterPlotOptions> &options, const wxPoint &pos = wxDefaultPosition,
         const wxSize &size = wxDefaultSize, long style = 0);
 
-private:
+protected:
     virtual wxScatterPlot& GetChart();
 
 private:

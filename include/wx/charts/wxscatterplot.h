@@ -81,6 +81,7 @@ public:
 
     virtual const wxChartCommonOptions& GetCommonOptions() const;
 
+    wxChartsGrid &Grid(){return m_grid;}    
 private:
     void Initialize(const wxScatterPlotData &data);
     static wxDouble GetMinXValue(const wxVector<wxScatterPlotDataset::ptr>& datasets);

@@ -34,6 +34,19 @@ wxChartCtrl::wxChartCtrl(wxWindow *parent,
     SetBackgroundColour(*wxWHITE);
 }
 
+bool wxChartCtrl::DoDraw(wxGraphicsContext &gc){
+    GetChart().Draw(gc);
+    return true;
+}
+
+bool wxChartCtrl::DoSize(wxSizeEvent &evt){
+    return true;
+}
+
+bool wxChartCtrl::DoMouseOver(wxMouseEvent &evt){
+    return true;
+}
+
 void wxChartCtrl::OnPaint(wxPaintEvent &evt)
 {
     wxAutoBufferedPaintDC dc(this);
@@ -42,7 +55,8 @@ void wxChartCtrl::OnPaint(wxPaintEvent &evt)
     wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
     if (gc)
     {
-        GetChart().Draw(*gc);
+        // GetChart().Draw(*gc);
+        DoDraw(*gc);
         delete gc;
     }
 }
@@ -54,6 +68,7 @@ void wxChartCtrl::OnSize(wxSizeEvent &evt)
         GetChart().SetSize(evt.GetSize());
         Refresh();
     }
+    DoSize(evt);
 }
 
 void wxChartCtrl::OnMouseOver(wxMouseEvent &evt)
@@ -63,6 +78,7 @@ void wxChartCtrl::OnMouseOver(wxMouseEvent &evt)
         GetChart().ActivateElementsAt(evt.GetPosition());
         Refresh();
     }
+    DoMouseOver(evt);
 }
 
 BEGIN_EVENT_TABLE(wxChartCtrl, wxControl)

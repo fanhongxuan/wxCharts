@@ -37,6 +37,7 @@ public:
     /// Constructs a wxScatterPlotOptions instance.
     wxScatterPlotOptions();
 
+    wxChartsGridOptions &GridOptions(){return m_gridOptions;}
     /// Gets the options for the grid.
     /// @return The options for the grid.
     const wxChartsGridOptions& GetGridOptions() const;

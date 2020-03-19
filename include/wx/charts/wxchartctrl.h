@@ -54,9 +54,12 @@ public:
         const wxSize &size = wxDefaultSize,
         long style = 0);
 
-private:
+protected:
     virtual wxChart& GetChart() = 0;
-
+    virtual bool DoDraw(wxGraphicsContext &gc);
+    virtual bool DoSize(wxSizeEvent &evt);
+    virtual bool DoMouseOver(wxMouseEvent &evt);
+private:
     void OnPaint(wxPaintEvent &evt);
     void OnSize(wxSizeEvent &evt);
     void OnMouseOver(wxMouseEvent &evt);
