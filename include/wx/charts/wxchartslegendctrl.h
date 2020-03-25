@@ -57,6 +57,9 @@ public:
         const wxSize &size = wxDefaultSize,
         long style = 0);
 
+    bool wxChartsLegendCtrl::Save(wxGraphicsContext &gc);
+protected:		
+    bool wxChartsLegendCtrl::DoDraw(wxGraphicsContext &gc);
 private:
     void OnPaint(wxPaintEvent &evt);
 

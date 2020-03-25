@@ -45,6 +45,37 @@ wxChartsLegendCtrl::wxChartsLegendCtrl(wxWindow *parent,
     }
 }
 
+bool wxChartsLegendCtrl::Save(wxGraphicsContext &gc){
+    return DoDraw(gc);
+}
+
+bool wxChartsLegendCtrl::DoDraw(wxGraphicsContext &gc)
+{
+    // Update the size of each line to reflect
+    // the currently selected options and the
+    // contents of each line.
+    for (size_t i = 0; i < m_lines.size(); ++i)
+    {
+        m_lines[i].UpdateSize(gc);
+    }
+    
+    // Set the position of each line based on
+    // the size of the lines that precede it.
+    wxDouble y = 1;
+    for (size_t i = 0; i < m_lines.size(); ++i)
+    {
+        m_lines[i].SetPosition(0, y);
+        y += (m_lines[i].GetSize().GetHeight() + 5);
+    }
+    
+    // Draw the lines
+    for (size_t i = 0; i < m_lines.size(); ++i)
+    {
+        m_lines[i].Draw(gc);
+    }
+    return true;
+}
+
 void wxChartsLegendCtrl::OnPaint(wxPaintEvent &evt)
 {
     wxAutoBufferedPaintDC dc(this);
@@ -54,29 +85,7 @@ void wxChartsLegendCtrl::OnPaint(wxPaintEvent &evt)
     wxGraphicsContext* gc = wxGraphicsContext::Create(dc);
     if (gc)
     {
-        // Update the size of each line to reflect
-        // the currently selected options and the
-        // contents of each line.
-        for (size_t i = 0; i < m_lines.size(); ++i)
-        {
-            m_lines[i].UpdateSize(*gc);
-        }
-
-        // Set the position of each line based on
-        // the size of the lines that precede it.
-        wxDouble y = 1;
-        for (size_t i = 0; i < m_lines.size(); ++i)
-        {
-            m_lines[i].SetPosition(0, y);
-            y += (m_lines[i].GetSize().GetHeight() + 5);
-        }
-
-        // Draw the lines
-        for (size_t i = 0; i < m_lines.size(); ++i)
-        {
-            m_lines[i].Draw(*gc);
-        }
-
+    	DoDraw(*gc);
         delete gc;
     }
 }
