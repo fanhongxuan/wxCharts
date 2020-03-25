@@ -54,6 +54,8 @@ public:
         const wxSize &size = wxDefaultSize,
         long style = 0);
 
+	virtual bool Save(wxGraphicsContext &gc){return DoDraw(gc);}
+
 protected:
     virtual wxChart& GetChart() = 0;
     virtual bool DoDraw(wxGraphicsContext &gc);
