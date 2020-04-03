@@ -43,7 +43,7 @@ public:
 
 private:
     virtual wxDoughnutChart& GetChart();
-    void OnUpdate(const std::map<wxString,wxChartSliceData> &data) override;
+    virtual void OnUpdate(const std::map<wxString,wxChartSliceData> &data) override;
 
 private:
     wxDoughnutChart m_doughnutChart;

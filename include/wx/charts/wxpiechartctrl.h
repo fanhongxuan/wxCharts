@@ -71,7 +71,7 @@ public:
 
 private:
     virtual wxPieChart& GetChart();
-    void OnUpdate(const std::map<wxString,wxChartSliceData> &data) override;
+    virtual void OnUpdate(const std::map<wxString,wxChartSliceData> &data) override;
 
 private:
     wxPieChart m_pieChart;
