@@ -63,6 +63,8 @@ WxCombinationChartFrame::WxCombinationChartFrame(const wxString& title)
     panelSizer->Add(combinationChartCtrl, 1, wxEXPAND);
     panel->SetSizer(panelSizer);
 
+	SetMinSize(wxSize(500,500));
+	SetSize(500,500);
     // Set up the sizer for the frame
     wxBoxSizer* topSizer = new wxBoxSizer(wxHORIZONTAL);
     topSizer->Add(panel, 1, wxEXPAND);

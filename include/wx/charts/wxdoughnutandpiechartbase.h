@@ -79,18 +79,6 @@ public:
     wxDoughnutAndPieChartBase(wxPieChartData::ptr data, const wxSize &size);
     void SetData(const std::map<wxString, wxChartSliceData> &data);
 
-private:
-    virtual void DoSetSize(const wxSize &size);
-    virtual void DoFit();
-    virtual void DoDraw(wxGraphicsContext &gc, bool suppressTooltips);
-    virtual wxSharedPtr<wxVector<const wxChartsElement*>> GetActiveElements(const wxPoint &point);
-
-    wxDouble CalculateCircumference(double value);
-
-private:
-    virtual const wxDoughnutAndPieChartOptionsBase& GetOptions() const = 0;
-
-private:
     class SliceArc : public wxChartsArc
     {
     public:
@@ -103,12 +91,27 @@ private:
         void Resize(const wxSize &size, const wxDoughnutAndPieChartOptionsBase& options);
 
         wxDouble GetValue() const;
-
+        const wxString &GetLabel() const{return m_label;}
     private:
+        wxString m_label;
         wxDouble m_value;
     };
 
-private:
+    wxVector<SliceArc::ptr> &GetSlices(){return m_slices;}
+protected:
+    virtual void DoSetSize(const wxSize &size);
+    virtual void DoFit();
+    virtual void DoDraw(wxGraphicsContext &gc, bool suppressTooltips);
+    virtual wxSharedPtr<wxVector<const wxChartsElement*>> GetActiveElements(const wxPoint &point);
+
+    wxDouble CalculateCircumference(double value);
+
+protected:
+    virtual const wxDoughnutAndPieChartOptionsBase& GetOptions() const = 0;
+
+protected:
+
+protected:
     wxPieChartData::ptr m_data;
     wxSize m_size;
     wxVector<SliceArc::ptr> m_slices;
