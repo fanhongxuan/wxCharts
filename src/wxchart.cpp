@@ -65,6 +65,7 @@ void wxChart::DrawTooltips(wxGraphicsContext &gc)
         // If only one element is active draw a normal tooltip
         wxChartTooltip tooltip((*m_activeElements)[0]->GetTooltipPosition(),
             (*m_activeElements)[0]->GetTooltipProvider()->GetTooltipText());
+        m_activeElements->clear();
         tooltip.Draw(gc);
     }
     else if (m_activeElements->size() > 1)
