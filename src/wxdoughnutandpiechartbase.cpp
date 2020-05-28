@@ -155,7 +155,10 @@ void wxDoughnutAndPieChartBase::DoSetSize(const wxSize &size)
 void wxDoughnutAndPieChartBase::DoFit()
 {
     SetData(m_data->GetSlices());
-
+    // note:fanhongxuan@gmail.com
+    // here m_activeElements maybe store those value, clear it first.
+    wxPoint point(0, 0);
+    ActivateElementsAt(point);
     for (size_t i = 0; i < m_slices.size(); ++i)
     {
         m_slices[i]->Resize(m_size, GetOptions());
