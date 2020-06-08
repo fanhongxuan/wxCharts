@@ -70,7 +70,7 @@ public:
     /// the GetTooltipText() function.
     wxChartTooltipProviderStatic(const wxString &title, const wxString &text,
         const wxColor &color);
-
+    void SetText(const wxString &title, const wxString &text);
     virtual wxString GetTooltipTitle() const;
     virtual wxString GetTooltipText() const;
     virtual wxColor GetAssociatedColor() const;

@@ -165,13 +165,26 @@ void wxDoughnutAndPieChartBase::DoFit()
     }
 
     wxDouble startAngle = 0.0;
+    double dTotalCount = 0.0;
     for (size_t i = 0; i < m_slices.size(); ++i)
     {
         SliceArc& currentSlice = *m_slices[i];
-
+        dTotalCount += currentSlice.GetValue();
         wxDouble endAngle = startAngle + CalculateCircumference(currentSlice.GetValue());
         currentSlice.SetAngles(startAngle, endAngle);
         startAngle = endAngle;
+    }
+
+    if (dTotalCount <= 0.000001){
+        return;
+    }
+    for (size_t i = 0; i < m_slices.size(); ++i){
+        wxChartTooltipProviderStatic * pToolTip = dynamic_cast<wxChartTooltipProviderStatic*>(m_slices[i].get()->GetTooltipProvider().get());
+        if (NULL != pToolTip){
+            wxString text;
+            text = wxString::Format("%s:%d %2.1f%%", m_slices[i]->GetLabel(), (int)m_slices[i]->GetValue(), m_slices[i]->GetValue() * 100.0 / dTotalCount);
+            pToolTip->SetText(pToolTip->GetTooltipTitle(), text);
+        }
     }
 }
 

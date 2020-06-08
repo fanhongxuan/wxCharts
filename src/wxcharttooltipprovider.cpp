@@ -37,6 +37,11 @@ wxChartTooltipProviderStatic::wxChartTooltipProviderStatic(const wxString &title
 {
 }
 
+void wxChartTooltipProviderStatic::SetText(const wxString &title, const wxString &text){
+    m_title = title;
+    m_text = text;
+}
+
 wxString wxChartTooltipProviderStatic::GetTooltipTitle() const
 {
     return m_title;

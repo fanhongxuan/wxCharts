@@ -91,7 +91,7 @@ public:
     /// @return The arc options.
     const wxChartsArcOptions& GetOptions() const;
 
-private:
+protected:
     wxChartsArcOptions m_options;
     wxDouble m_x;
     wxDouble m_y;
